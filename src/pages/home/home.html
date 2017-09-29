@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Azure Cognitive Emotion
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>{{title}}</h2>
+  <ion-item>
+    <ion-label>URL of image</ion-label>
+    <ion-input floating type="text" [(ngModel)]="imageUrl"></ion-input>
+  </ion-item>
+  <button ion-button *ngIf="!setURLStatus" (click)="setImage()">Set Image</button>
+  <button ion-button *ngIf="getPersonEmotionStatus" (click)="resetImage()">Reset Image</button>
+  <ion-item *ngIf="setURLStatus">
+    <img [src]="imageUrl" height="300"/>
+  </ion-item>
+  <button ion-button *ngIf="setURLStatus && !getPersonEmotionStatus" (click)="getPersonEmotion(imageUrl)">Get Person Emotion</button>
+  <!-- Result -->
+  <h2 *ngIf="getPersonEmotionStatus">Emotion:</h2>
+  <ion-list *ngIf="scores">
+    <ion-item>
+      <h2>{{scores.anger}}</h2>
+      <p>Anger</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.contempt}}</h2>
+      <p>Contempt</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.disgust}}</h2>
+      <p>Disgust</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.fear}}</h2>
+      <p>Fear</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.happiness}}</h2>
+      <p>Happiness</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.neutral}}</h2>
+      <p>Neutral</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.sadness}}</h2>
+      <p>Sadness</p>
+    </ion-item>
+    <ion-item>
+      <h2>{{scores.surprise}}</h2>
+      <p>Surprise</p>
+    </ion-item>
+  </ion-list>
+  <!-- Details -->
+  <p *ngIf="persons">{{persons | json}}</p>
+</ion-content>
